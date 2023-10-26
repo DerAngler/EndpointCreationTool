@@ -1,0 +1,202 @@
+<Window x:Name="wpfWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls1="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls0="clr-namespace:System;assembly=mscorlib"
+        xmlns:s="clr-namespace:System;assembly=mscorlib"
+        Width="307"
+        Height="404"
+        Background="White"
+        Title="Endpoint Creation Tool">
+  <GroupBox Height="374"
+            Background="White"
+            BorderBrush="White"
+            BorderThickness="0,0,0,0"
+            FontFamily="Segoe UI"
+            Header="{Binding Mode=OneWay}"
+            Visibility="Visible">
+    <Canvas Height="370" VerticalAlignment="Top">
+      <Label Content="Standort"
+             Width="137"
+             Height="35"
+             BorderThickness="1,1,1,1"
+             Canvas.Left="-0.25"
+             Canvas.Top="5.375" />
+      <Label Content="Gerätetyp"
+             Width="137"
+             Height="35"
+             BorderThickness="1,1,1,1"
+             RenderTransformOrigin="0.4927,0.537"
+             Canvas.Left="-0.25"
+             Canvas.Top="40.375" />
+      <Label Content="OEM-Lizenzaufkleber"
+             Width="137"
+             Height="35"
+             BorderThickness="1,1,1,1"
+             Canvas.Left="-0.25"
+             Canvas.Top="74.375" />
+      <Label Content="OS-Install erlauben"
+             Width="137"
+             Height="30"
+             BorderThickness="1,1,1,1"
+             Canvas.Left="-0.25"
+             Canvas.Top="246.375" />
+      <ComboBox Width="140"
+                Height="20"
+                Canvas.Left="136"
+                Canvas.Top="10.625">
+        <ComboBox Width="140"
+                  Height="20"
+                  Canvas.Left="175"
+                  Canvas.Top="8" />
+        <ComboBox Width="140"
+                  Height="20"
+                  Canvas.Left="175"
+                  Canvas.Top="8">
+          <ComboBox Width="140"
+                    Height="20"
+                    Canvas.Left="175"
+                    Canvas.Top="8" />
+        </ComboBox>
+      </ComboBox>
+      <ComboBox Width="140"
+                Height="20"
+                Canvas.Left="136"
+                Canvas.Top="47.125">
+        <ComboBox Width="140"
+                  Height="20"
+                  Canvas.Left="175"
+                  Canvas.Top="8" />
+        <ComboBox Width="140"
+                  Height="20"
+                  Canvas.Left="175"
+                  Canvas.Top="8">
+          <ComboBox Width="140"
+                    Height="20"
+                    Canvas.Left="175"
+                    Canvas.Top="8" />
+        </ComboBox>
+        <ComboBox Width="140"
+                  Height="20"
+                  Canvas.Left="175"
+                  Canvas.Top="8">
+          <ComboBox Width="140"
+                    Height="20"
+                    Canvas.Left="175"
+                    Canvas.Top="8" />
+          <ComboBox Width="140"
+                    Height="20"
+                    Canvas.Left="175"
+                    Canvas.Top="8">
+            <ComboBox Width="140"
+                      Height="20"
+                      Canvas.Left="175"
+                      Canvas.Top="8" />
+          </ComboBox>
+        </ComboBox>
+      </ComboBox>
+      <ComboBox Width="140"
+                Height="20"
+                Canvas.Left="136"
+                Canvas.Top="81.375">
+        <ComboBox Width="140"
+                  Height="20"
+                  Canvas.Left="175"
+                  Canvas.Top="8" />
+        <ComboBox Width="140"
+                  Height="20"
+                  Canvas.Left="175"
+                  Canvas.Top="8">
+          <ComboBox Width="140"
+                    Height="20"
+                    Canvas.Left="175"
+                    Canvas.Top="8" />
+        </ComboBox>
+        <ComboBox Width="140"
+                  Height="20"
+                  Canvas.Left="175"
+                  Canvas.Top="8">
+          <ComboBox Width="140"
+                    Height="20"
+                    Canvas.Left="175"
+                    Canvas.Top="8" />
+          <ComboBox Width="140"
+                    Height="20"
+                    Canvas.Left="175"
+                    Canvas.Top="8">
+            <ComboBox Width="140"
+                      Height="20"
+                      Canvas.Left="175"
+                      Canvas.Top="8" />
+          </ComboBox>
+        </ComboBox>
+      </ComboBox>
+      <Label Content="BA-Nummer"
+             Width="137"
+             Height="34"
+             BorderThickness="1,1,1,1"
+             Canvas.Left="-0.25"
+             Canvas.Top="108.375" />
+      <TextBox Width="140"
+               Height="20"
+               Canvas.Left="136"
+               Canvas.Top="114" />
+      <CheckBox Width="18" Canvas.Left="261" Canvas.Top="251" />
+      <TextBox Width="140"
+               Height="20"
+               Canvas.Left="136"
+               Canvas.Top="147" />
+      <TextBox Width="140"
+               Height="20"
+               Canvas.Left="136"
+               Canvas.Top="183.375" />
+      <Label Content="Benutzer"
+             Width="137"
+             Height="28"
+             BorderThickness="1,1,1,1"
+             Canvas.Left="-0.25"
+             Canvas.Top="142.375" />
+      <Label Content="Abteilung"
+             Width="137"
+             Height="34"
+             BorderThickness="1,1,1,1"
+             Canvas.Left="-0.25"
+             Canvas.Top="178.375" />
+      <Label Content="Niederlassung"
+             Width="137"
+             Height="34"
+             BorderThickness="1,1,1,1"
+             Canvas.Left="-0.25"
+             Canvas.Top="212.375" />
+      <Label Content="OS-Install zuweisen"
+             Width="137"
+             Height="34"
+             BorderThickness="1,1,1,1"
+             Canvas.Left="-0.25"
+             Canvas.Top="272.375" />
+      <Button Content="Client anlegen"
+              Width="272"
+              Height="23"
+              Canvas.Left="5"
+              Canvas.Top="306" />
+      <Label Content="Client direkt in richtiger OU anlegen (Admin)"
+             Width="252"
+             Height="34"
+             BorderThickness="1,1,1,1"
+             Canvas.Left="-0.25"
+             Canvas.Top="332.375" />
+      <CheckBox Width="18" Canvas.Left="261" Canvas.Top="279" />
+      <CheckBox Width="18"
+                RenderTransformOrigin="0.4444,0.4444"
+                Canvas.Left="261"
+                Canvas.Top="338" />
+      <TextBox Width="140"
+               Height="20"
+               Canvas.Left="136"
+               Canvas.Top="217.375" />
+    </Canvas>
+  </GroupBox>
+</Window>
