@@ -3,7 +3,7 @@
 
 ### v1.1.0 [31. Oktober 2023]
 
- - Aufteilung der Skriptausführung auf 2 Runspaces - 1x für GUI und 1x für Terminal (Ermöglicht nötige parallele Ausführung)
+ - Aufteilung der Skriptausführung auf 2 RunSpaces - 1x für GUI und 1x für Terminal (Ermöglicht nötige parallele Ausführung)
 
  - Migration GUI Assembley von Winforms zu WPF (Windows Presentation Framework
 
@@ -31,7 +31,7 @@
     - "SEU", da es keine SEU-Clients geben wird
     - "FAU", da es keine FAU-Clients geben wird
     - "AWS", da diese Clients über das AWS-Portal erstellt werden müssen
-    - "DMZ(1-4)", da diese Endpoints nicht über Endpoint Creation Tool erstellt werden sollen
+    - "DMZ[1-4]", da diese Endpoints nicht über Endpoint Creation Tool erstellt werden sollen
 
 
 ### v1.0.2

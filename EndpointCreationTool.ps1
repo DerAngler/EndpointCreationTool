@@ -53,6 +53,9 @@ function Get-XamlObject {
 $path = Join-Path $PSScriptRoot '\EndpointCreationTool.xaml'
 $Window = [hashtable]::Synchronized(@{ })
 $Window = Get-ChildItem -Path $path | Get-XamlObject
+# $Window.Standort_CoBo.Items.Add(" ")
+$Window.Standort_CoBo.Items.Add("AMB")
+# $Window.Standort_CoBo.SelectedIndex = 0
 
 # Skript
 $Window.Log_RTB.Dispatcher.Invoke([action]{
@@ -110,7 +113,6 @@ $Window.ClientAnlegen_BTN.add_Click({
 	$runspace.SessionStateProxy.SetVariable("Window",$Window)
 	
 	[void]$PowerShell.AddScript({
-		$Text = ""
 		#Funktionen in GUI Runspace
 		function Progress($Progress){
 			$Window.ProgressBar.Dispatcher.Invoke([action]{
@@ -156,6 +158,6 @@ $Window.ClientAnlegen_BTN.add_Click({
 		# Message("erfolgreich`r`"$($Window.Name)`" wurde in `"$($Window.NDL)`" angelegt")
 		Message("erfolgreich`r############## FERTIG #############")
 	})
-	$AsyncObject = $PowerShell.BeginInvoke() #Zeile tut Not, obwohl Variable nie genutzt wird!?!?
+	$PowerShell.BeginInvoke()
 })
-$Window.WpfWindow.ShowDialog() | Out-Null
+$Window.MainWindow.ShowDialog() | Out-Null
