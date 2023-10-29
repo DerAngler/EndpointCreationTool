@@ -68,9 +68,13 @@ $Window.BANummer_TB.Add_TextChanged({
 })
 
 $Window.MAC_TB.Add_TextChanged({
-	if (($Window.MAC_TB.Text -match "^[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}$" -or $Window.MAC_TB.Text -match "^[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}$" -or $Window.MAC_TB.Text -match "^[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}$")) {
-		$Window.OSZuweisen_CB.IsEnabled = $true
-		$Window.MAC_TB.Background = "white"
+	if (($Window.MAC_TB.Text -match "^[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}$" -or $Window.MAC_TB.Text -match "^[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}$" -or $Window.MAC_TB.Text -match "^[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}$" -or $Window.MAC_TB.Text -eq "")) {
+		if(!($Window.MAC_TB.Text -eq "")){
+			$Window.MAC_TB.Background = "white"
+			$Window.OSZuweisen_CB.IsEnabled = $true
+		}else{
+			$Window.MAC_TB.Background = "white"
+		}
 	}else{
 		$Window.OSZuweisen_CB.IsEnabled = $false
 		$Window.OSZuweisen_CB.IsChecked = $false
