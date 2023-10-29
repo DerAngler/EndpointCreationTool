@@ -1,4 +1,6 @@
-$Version = "1.1.01"
+$LogPath = "C:\Temp\"
+$Version = "1.1.0"
+$Rot = "#f55555"
 # WPF-Asembly laden und die GUI (xaml) einbinden
 [System.Reflection.Assembly]::LoadWithPartialName("PresentationFramework") | Out-Null
 #Funktionen in Terminal Runspace
@@ -59,7 +61,7 @@ $Window.Log_RTB.Dispatcher.Invoke([action]{
 
 $Window.BANummer_TB.Add_TextChanged({
     if (!($Window.BANummer_TB.Text -match "^[0-9]{0,5}$")) {
-        $Window.BANummer_TB.Background = "#f55555"
+        $Window.BANummer_TB.Background = $Rot
     }else{
         $Window.BANummer_TB.Background = "white"
     }
@@ -68,10 +70,26 @@ $Window.BANummer_TB.Add_TextChanged({
 $Window.MAC_TB.Add_TextChanged({
 	if (($Window.MAC_TB.Text -match "^[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}$" -or $Window.MAC_TB.Text -match "^[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}$" -or $Window.MAC_TB.Text -match "^[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}$")) {
 		$Window.OSZuweisen_CB.IsEnabled = $true
+		$Window.MAC_TB.Background = "white"
 	}else{
 		$Window.OSZuweisen_CB.IsEnabled = $false
 		$Window.OSZuweisen_CB.IsChecked = $false
+		$Window.MAC_TB.Background = $Rot
 	}
+})
+
+$Window.ChangeLog_BTN.add_Click({
+	$ChangeLogPath = Join-Path $PSScriptRoot '\ChangeLog.log'
+	notepad $ChangeLogPath
+})
+
+$Window.Logs_BTN.add_Click({
+	explorer $LogPath
+})
+
+$Window.Doku_BTN.add_Click({
+	$DokuPath = Join-Path $PSScriptRoot '\Dokumentation.pdf'
+	Start-Process $DokuPath
 })
 
 $Window.ClientAnlegen_BTN.add_Click({
