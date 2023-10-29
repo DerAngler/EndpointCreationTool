@@ -25,7 +25,7 @@
 - "SEU", da es keine SEU-Clients geben wird
 - "FAU", da es keine FAU-Clients geben wird
 - "AWS", da diese Clients über das AWS-Portal erstellt werden müssen
-- "DMZ(1-4)", da diese Endpoints nicht über Endpoint Creation Tool erstellt werden sollen
+- "DMZ[1-4]", da diese Endpoints nicht über Endpoint Creation Tool erstellt werden sollen
 
 ## v1.0.2
 
