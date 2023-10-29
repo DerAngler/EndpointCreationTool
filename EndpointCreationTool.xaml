@@ -6,6 +6,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Controls0="clr-namespace:System;assembly=mscorlib"
+        xmlns:Controls2="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         Width="315"
         Height="564"
@@ -257,31 +258,31 @@
                    Canvas.Top="494" />
       <Button x:Name="Einstellungen_BTN"
               Content="Einstellungen"
-              Width="72"
-              Height="23"
-              FontSize="11"
+              Width="78"
+              Height="20"
+              FontSize="12"
               Canvas.Left="4"
               Canvas.Top="-20" />
       <Button x:Name="ChangeLog_BTN"
-              Content="Change Log"
+              Content="ChangeLog"
               Width="72"
-              Height="23"
+              Height="20"
               FontSize="12"
-              Canvas.Left="79"
+              Canvas.Left="83"
               Canvas.Top="-20" />
       <Button x:Name="Doku_BTN"
               Content="Doku"
               Width="72"
-              Height="23"
+              Height="20"
               FontSize="12"
               Canvas.Left="229"
               Canvas.Top="-20" />
       <Button x:Name="Logs_BTN"
               Content="Logs"
               Width="72"
-              Height="23"
+              Height="20"
               FontSize="12"
-              Canvas.Left="154"
+              Canvas.Left="156"
               Canvas.Top="-20" />
     </Canvas>
   </GroupBox>

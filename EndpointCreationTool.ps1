@@ -56,7 +56,7 @@ $Window = Get-ChildItem -Path $path | Get-XamlObject
 
 # Skript
 $Window.Log_RTB.Dispatcher.Invoke([action]{
-	$Window.Log_RTB.AppendText("Endpoint Creation Tool gestartet`rVersion: $($Version)`rBenutzer: $($ENV:USERNAME)`rServer: NESDP001.de.geis-group.net`rWarte auf Eingaben... ")
+	$Window.Log_RTB.AppendText("Endpoint Creation Tool gestartet`rVersion: $($Version)`rBenutzer: $($ENV:USERNAME)`rServer: NESDP001.de.geis-group.net`rWarte auf Eingaben ... ")
 })
 
 $Window.BANummer_TB.Add_TextChanged({
@@ -74,6 +74,8 @@ $Window.MAC_TB.Add_TextChanged({
 			$Window.OSZuweisen_CB.IsEnabled = $true
 		}else{
 			$Window.MAC_TB.Background = "white"
+			$Window.OSZuweisen_CB.IsEnabled = $false
+			$Window.OSZuweisen_CB.IsChecked = $false
 		}
 	}else{
 		$Window.OSZuweisen_CB.IsEnabled = $false
