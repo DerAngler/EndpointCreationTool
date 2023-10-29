@@ -31,7 +31,7 @@
 
 #### - Anpassungen an den Logs
 - Ergänzung fehlender Variablen
-- Logs werden jetzt in die Freigabe `\\nesdp001.de.geis-group.net\Clients_anlegen_Logs$` geschrieben
+- Logs werden jetzt in die Freigabe `\\<Servername>\<Freigabename>$` geschrieben
 
 ## v1.0.1
 
