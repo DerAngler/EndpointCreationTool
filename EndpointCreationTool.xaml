@@ -7,9 +7,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Controls0="clr-namespace:System;assembly=mscorlib"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
-        Width="303"
-        Height="555"
+        Width="315"
+        Height="545"
         Background="White"
+        FontFamily="Segoe UI"
         FontSize="12"
         ResizeMode="CanMinimize"
         SizeToContent="Manual"
@@ -17,7 +18,7 @@
         Topmost="False"
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow">
-  <GroupBox Width="293"
+  <GroupBox Width="294"
             Height="521"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -28,9 +29,9 @@
             FontFamily="Segoe UI"
             Header="{Binding Mode=OneWay}"
             Visibility="Visible">
-    <Canvas Width="295"
-            Height="512"
-            HorizontalAlignment="Center"
+    <Canvas Width="291"
+            Height="498"
+            HorizontalAlignment="Right"
             VerticalAlignment="Top">
       <Label Content="Standort"
              Width="137"
@@ -63,7 +64,7 @@
              Canvas.Left="3"
              Canvas.Top="258" />
       <ComboBox x:Name="Standort_CoBo"
-                Width="142"
+                Width="156"
                 Height="24"
                 FontSize="16"
                 Language="de-de"
@@ -71,7 +72,7 @@
                 Canvas.Left="141"
                 Canvas.Top="8" />
       <ComboBox x:Name="Typ_CoBo"
-                Width="142"
+                Width="156"
                 Height="24"
                 FontSize="16"
                 Language="de-de"
@@ -79,7 +80,7 @@
                 Canvas.Left="141"
                 Canvas.Top="40" />
       <ComboBox x:Name="Lizenz_CoBo"
-                Width="142"
+                Width="156"
                 Height="24"
                 FontSize="16"
                 Language="de-de"
@@ -94,7 +95,7 @@
              Canvas.Left="3"
              Canvas.Top="99" />
       <TextBox x:Name="BANummer_TB"
-               Width="142"
+               Width="156"
                Height="24"
                FontSize="16"
                Language="de-de"
@@ -106,10 +107,10 @@
                 Width="18"
                 Height="18"
                 TabIndex="9"
-                Canvas.Left="266"
+                Canvas.Left="282"
                 Canvas.Top="264" />
       <TextBox x:Name="Benutzer_TB"
-               Width="142"
+               Width="156"
                Height="24"
                FontSize="16"
                Language="de-de"
@@ -117,7 +118,7 @@
                Canvas.Left="141"
                Canvas.Top="136" />
       <TextBox x:Name="Abteilung_TB"
-               Width="142"
+               Width="156"
                Height="24"
                FontSize="16"
                Language="de-de"
@@ -154,7 +155,7 @@
              Canvas.Top="284" />
       <Button x:Name="ClientAnlegen_BTN"
               Content="Client anlegen"
-              Width="273"
+              Width="290"
               Height="30"
               FontSize="18"
               Canvas.Left="8"
@@ -172,7 +173,7 @@
                 Height="18"
                 RenderTransformOrigin="0.5,0.476"
                 TabIndex="10"
-                Canvas.Left="266"
+                Canvas.Left="282"
                 Canvas.Top="290" />
       <CheckBox x:Name="RichtigeOU_CB"
                 Width="15"
@@ -180,10 +181,10 @@
                 ClickMode="Release"
                 FontSize="13"
                 RenderTransformOrigin="0.4837,0.4444"
-                Canvas.Left="266"
+                Canvas.Left="282"
                 Canvas.Top="350" />
       <TextBox x:Name="NDL_TB"
-               Width="142"
+               Width="156"
                Height="24"
                FontSize="16"
                Language="de-de"
@@ -191,7 +192,7 @@
                Canvas.Left="141"
                Canvas.Top="200" />
       <TextBox x:Name="MAC_TB"
-               Width="142"
+               Width="156"
                Height="24"
                FontSize="16"
                Language="de-de"
@@ -206,8 +207,8 @@
              Canvas.Left="3"
              Canvas.Top="227" />
       <RichTextBox x:Name="Log_RTB"
-                   Width="295"
-                   Height="146"
+                   Width="310"
+                   Height="145"
                    Background="Black"
                    BorderBrush="Black"
                    FontFamily="Segoe UI"
@@ -215,8 +216,15 @@
                    Foreground="White"
                    IsReadOnly="True"
                    Language="de-de"
+                   Visibility="Visible"
                    Canvas.Left="0"
-                   Canvas.Top="370" />
+                   Canvas.Top="371" />
+      <ProgressBar x:Name="ProgressBar"
+                   Width="307"
+                   Height="28"
+                   Visibility="Hidden"
+                   Canvas.Left="0"
+                   Canvas.Top="494" />
     </Canvas>
   </GroupBox>
 </Window>
