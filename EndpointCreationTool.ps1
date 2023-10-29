@@ -56,6 +56,24 @@ $Window = Get-ChildItem -Path $path | Get-XamlObject
 $Window.Log_RTB.Dispatcher.Invoke([action]{
 	$Window.Log_RTB.AppendText("Endpoint Creation Tool gestartet`rVersion: $($Version)`rBenutzer: $($ENV:USERNAME)`rServer: NESDP001.de.geis-group.net`rWarte auf Eingaben... ")
 })
+
+$Window.BANummer_TB.Add_TextChanged({
+    if (!($Window.BANummer_TB.Text -match "^[0-9]{0,5}$")) {
+        $Window.BANummer_TB.Background = "#f55555"
+    }else{
+        $Window.BANummer_TB.Background = "white"
+    }
+})
+
+$Window.MAC_TB.Add_TextChanged({
+	if (($Window.MAC_TB.Text -match "^[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}$" -or $Window.MAC_TB.Text -match "^[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}$" -or $Window.MAC_TB.Text -match "^[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}$")) {
+		$Window.OSZuweisen_CB.IsEnabled = $true
+	}else{
+		$Window.OSZuweisen_CB.IsEnabled = $false
+		$Window.OSZuweisen_CB.IsChecked = $false
+	}
+})
+
 $Window.ClientAnlegen_BTN.add_Click({
 	#Variablen von Terminal RunSpace in GUI RunSpace pushen
 	$Window.Name = $Window.MAC_TB.text
@@ -73,8 +91,8 @@ $Window.ClientAnlegen_BTN.add_Click({
 		function Progress($Progress){
 			$Window.ProgressBar.Dispatcher.Invoke([action]{
 				$Window.ProgressBar.Value = $Progress
+				$Window.ProgressBar.TextInput = "$($Progress)%"
 			})
-			Write-Host "test$($Progress)"
 		}
 
 		function Message($Message){
@@ -87,31 +105,32 @@ $Window.ClientAnlegen_BTN.add_Click({
 			$Window.Log_RTB.Document.Blocks.Clear()
 			$Window.ProgressBar.Visibility = "Visible"
 			$Window.ProgressBar.Value = 0
-			$Window.Log_RTB.AppendText("Hostname ermitteln...    ")
+			$Window.Log_RTB.AppendText("Name ermitteln...   ")
 		})
 		start-sleep 1
 		Progress(10)
 		start-sleep 1
 		Progress(20)
 		start-sleep 1
-		Message("$($Window.Name)`rClient wird angelegt ...                   ")
+		Message("$($Window.Name)`rClient anlegen ...   ")
 		Progress(40)
 		start-sleep 1
 		Progress(50)
 		Start-Sleep 2
 		Progress(60)
 		Start-Sleep 2
-		Message("erfolgreich`rVariablen setzen ...                         ")
+		Message("erfolgreich`rVariablen setzen ...   ")
 		Progress(80)
 		start-sleep 1
-		Message("erfolgreich`rOS-Install zuweisen ...                    ")
+		Message("erfolgreich`rOS-Install zuweisen ...   ")
 		Progress(90)
 		start-sleep 1
-		Message("erfolgreich`rSchreibe Log ....                              ")
+		Message("erfolgreich`rLog Eintrag schreiben ...   ")
 		Progress(95)
 		Start-Sleep 1
 		Progress(100)
-		Message("erfolgreich`r$($Window.Name) wurde in $($Window.NDL) angelegt")
+		# Message("erfolgreich`r`"$($Window.Name)`" wurde in `"$($Window.NDL)`" angelegt")
+		Message("erfolgreich`r############## FERTIG #############")
 	})
 	$AsyncObject = $PowerShell.BeginInvoke() #Zeile tut Not, obwohl Variable nie genutzt wird!?!?
 })
