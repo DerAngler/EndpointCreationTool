@@ -14,7 +14,7 @@
  - Button: "Logs" um die Logs des Endpoint Creation Tools im Explorer zu öffnen
  - Button: "Hilfe" um die Doku zu öffnen
  - ProgressBar: Fortschrittsbalken für die Skriptausführung 
- #### Anpassungen an der Ausnahmen-Liste für Bara-DSMove.ini
+ #### - Anpassungen an der Ausnahmen-Liste für Bara-DSMove.ini
  - "FAU" wieder aufgenommen, da es jetzt doch FAU-Clients geben wird
  - "ZMK" (Zentrales Marketing) aufgenommen (Neue/Umbenannte Zentralabteilung ehemals ZPM)
  - "ZSI" entfernt, da die jetzt wieder "ZIT" sind
@@ -29,7 +29,7 @@
 
 ## v1.0.2
 
-#### Anpassungen an den Logs
+#### - Anpassungen an den Logs
 - Ergänzung fehlender Variablen
 - Logs werden jetzt in die Freigabe `\\nesdp001.de.geis-group.net\Clients_anlegen_Logs$` geschrieben
 
