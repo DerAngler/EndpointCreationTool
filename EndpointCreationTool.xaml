@@ -207,7 +207,7 @@
              Canvas.Left="3"
              Canvas.Top="227" />
       <RichTextBox x:Name="Log_RTB"
-                   Width="310"
+                   Width="1000"
                    Height="145"
                    Background="Black"
                    BorderBrush="Black"

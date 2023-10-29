@@ -1,6 +1,7 @@
 $Version = "1.1.01"
 # WPF-Asembly laden und die GUI (xaml) einbinden
 [System.Reflection.Assembly]::LoadWithPartialName("PresentationFramework") | Out-Null
+#Funktionen in Terminal Runspace
 function Get-XamlObject {
 	[CmdletBinding()]
 	param(
@@ -56,72 +57,62 @@ $Window.Log_RTB.Dispatcher.Invoke([action]{
 	$Window.Log_RTB.AppendText("Endpoint Creation Tool gestartet`rVersion: $($Version)`rBenutzer: $($ENV:USERNAME)`rServer: NESDP001.de.geis-group.net`rWarte auf Eingaben... ")
 })
 $Window.ClientAnlegen_BTN.add_Click({
-	# Zweite Runspace erstellen, damit die GUI und das Terminal parallel ausgeführt werden können
+	#Variablen von Terminal RunSpace in GUI RunSpace pushen
+	$Window.Name = $Window.MAC_TB.text
+	$Window.NDL = $Window.BANummer_TB.text
+	# GUI Runspace erstellen, damit die GUI und das Terminal parallel ausgeführt werden können
 	$runspace = [runspacefactory]::CreateRunspace()
 	$powerShell = [powershell]::Create()
 	$powerShell.runspace = $runspace
 	$runspace.Open()
 	$runspace.SessionStateProxy.SetVariable("Window",$Window)
+	
 	[void]$PowerShell.AddScript({
+		$Text = ""
+		#Funktionen in GUI Runspace
+		function Progress($Progress){
+			$Window.ProgressBar.Dispatcher.Invoke([action]{
+				$Window.ProgressBar.Value = $Progress
+			})
+			Write-Host "test$($Progress)"
+		}
+
+		function Message($Message){
+			$Window.Log_RTB.Dispatcher.Invoke([action]{
+				$Window.Log_RTB.AppendText("$($Message)")
+			})
+		}
 		# Skript
 		$Window.Log_RTB.Dispatcher.Invoke([action]{
 			$Window.Log_RTB.Document.Blocks.Clear()
 			$Window.ProgressBar.Visibility = "Visible"
 			$Window.ProgressBar.Value = 0
-			$Window.Log_RTB.AppendText("Ermittle Hostname ... ")
+			$Window.Log_RTB.AppendText("Hostname ermitteln...    ")
 		})
 		start-sleep 1
-		$Window.ProgressBar.Dispatcher.Invoke([action]{
-			$Window.ProgressBar.Value = 10
-		})
+		Progress(10)
 		start-sleep 1
-		$Window.ProgressBar.Dispatcher.Invoke([action]{
-			$Window.ProgressBar.Value = 20
-		})
+		Progress(20)
 		start-sleep 1
-		$Window.Log_RTB.Dispatcher.Invoke([action]{
-			$Window.Log_RTB.AppendText("$($Window.MAC_TB.Text)`rErstelle Client ... ")
-		})
-		$Window.ProgressBar.Dispatcher.Invoke([action]{
-			$Window.ProgressBar.Value = 40
-		})
+		Message("$($Window.Name)`rClient wird angelegt ...                   ")
+		Progress(40)
 		start-sleep 1
-		$Window.ProgressBar.Dispatcher.Invoke([action]{
-			$Window.ProgressBar.Value = 50
-		})
+		Progress(50)
 		Start-Sleep 2
-		$Window.ProgressBar.Dispatcher.Invoke([action]{
-			$Window.ProgressBar.Value = 60
-		})
+		Progress(60)
 		Start-Sleep 2
-		$Window.Log_RTB.Dispatcher.Invoke([action]{
-			$Window.Log_RTB.AppendText("erfolgreich`rVariablen setzen ... ")
-		})
-		$Window.ProgressBar.Dispatcher.Invoke([action]{
-			$Window.ProgressBar.Value = 80
-		})
+		Message("erfolgreich`rVariablen setzen ...                         ")
+		Progress(80)
 		start-sleep 1
-		$Window.Log_RTB.Dispatcher.Invoke([action]{
-			$Window.Log_RTB.AppendText("erfolgreich`rOS-Install zuweisen ... ")
-		})
-		$Window.ProgressBar.Dispatcher.Invoke([action]{
-			$Window.ProgressBar.Value = 90
-		})
+		Message("erfolgreich`rOS-Install zuweisen ...                    ")
+		Progress(90)
 		start-sleep 1
-		$Window.Log_RTB.Dispatcher.Invoke([action]{
-			$Window.Log_RTB.AppendText("erfolgreich`rSchreibe Log ... ")
-		})
-		$Window.ProgressBar.Dispatcher.Invoke([action]{
-			$Window.ProgressBar.Value = 95
-		})
+		Message("erfolgreich`rSchreibe Log ....                              ")
+		Progress(95)
 		Start-Sleep 1
-		$Window.ProgressBar.Dispatcher.Invoke([action]{
-			$Window.ProgressBar.Value = 100
-		})
-		$Window.Log_RTB.Dispatcher.Invoke([action]{
-			$Window.Log_RTB.AppendText("erfolgreich`r$($Window.MAC_TB.Text) wurde in $($Window.BANummer_TB.Text) angelegt")
-		})
+		Progress(100)
+		Message("erfolgreich`r$($Window.Name) wurde in $($Window.NDL) angelegt")
 	})
-	$AsyncObject = $PowerShell.BeginInvoke() #Zeile tut Not, obwohl Variable nie genutzt wird!
+	$AsyncObject = $PowerShell.BeginInvoke() #Zeile tut Not, obwohl Variable nie genutzt wird!?!?
 })
 $Window.WpfWindow.ShowDialog() | Out-Null
