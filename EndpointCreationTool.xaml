@@ -23,7 +23,7 @@
             Height="537"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            HorizontalContentAlignment="Left"
+            HorizontalContentAlignment="Center"
             Background="White"
             BorderBrush="White"
             BorderThickness="0,0,0,0"
@@ -115,7 +115,7 @@
                Canvas.Top="104" />
       <CheckBox x:Name="OSErlauben_CB"
                 Width="18"
-                Height="18"
+                Height="17"
                 VerticalAlignment="Bottom"
                 IsChecked="True"
                 IsEnabled="True"
@@ -191,13 +191,12 @@
              Canvas.Top="340" />
       <CheckBox x:Name="OSZuweisen_CB"
                 Content=""
-                Width="18"
+                Width="19.000000000000114"
                 Height="18"
                 VerticalAlignment="Bottom"
                 IsEnabled="False"
-                RenderTransformOrigin="0.5,0.476"
                 TabIndex="10"
-                Canvas.Left="282"
+                Canvas.Left="281.99999999999989"
                 Canvas.Top="290" />
       <CheckBox x:Name="RichtigeOU_CB"
                 Width="18"

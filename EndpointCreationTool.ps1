@@ -48,97 +48,126 @@ function Get-XamlObject {
 		Write-Output $output
 		Write-Verbose "Finished: $($MyInvocation.Mycommand)"
 	}
-}
+} 
 
-$path = Join-Path $PSScriptRoot '\EndpointCreationTool.xaml'
-$Window = [hashtable]::Synchronized(@{ })
-$Window = Get-ChildItem -Path $path | Get-XamlObject
-# $Window.Standort_CoBo.Items.Add(" ")
-$Window.Standort_CoBo.Items.Add("AMB")
-# $Window.Standort_CoBo.SelectedIndex = 0
+$GUIpath = Join-Path $PSScriptRoot '\EndpointCreationTool.xaml'
+$GUI = [hashtable]::Synchronized(@{ })
+$GUI = Get-ChildItem -Path $GUIpath | Get-XamlObject
 
+$EinstellungenPath = Join-Path $PSScriptRoot '\Einstellungen.xaml'
+$Einstellungen = [hashtable]::Synchronized(@{ })
+$Einstellungen = Get-ChildItem -Path $EinstellungenPath | Get-XamlObject
+
+$GUI.Standort_CoBo.Items.Add("AMB")
 # Skript
-$Window.Log_RTB.Dispatcher.Invoke([action]{
-	$Window.Log_RTB.AppendText("Endpoint Creation Tool gestartet`rVersion: $($Version)`rBenutzer: $($ENV:USERNAME)`rServer: NESDP001.de.geis-group.net`rWarte auf Eingaben ... ")
+$GUI.Log_RTB.Dispatcher.Invoke([action]{
+	$GUI.Log_RTB.AppendText("Endpoint Creation Tool gestartet`rVersion: $($Version)`rBenutzer: $($ENV:USERNAME)`rServer: NESDP001.de.geis-group.net`rWarte auf Eingaben ... ")
 })
 
-$Window.BANummer_TB.Add_TextChanged({
-    if (!($Window.BANummer_TB.Text -match "^[0-9]{0,5}$")) {
-        $Window.BANummer_TB.Background = $Rot
+$GUI.BANummer_TB.Add_TextChanged({
+    if (!($GUI.BANummer_TB.Text -match "^[0-9]{0,5}$")) {
+        $GUI.BANummer_TB.Background = $Rot
     }else{
-        $Window.BANummer_TB.Background = "white"
+        $GUI.BANummer_TB.Background = "white"
+    }
+	if ($GUI.BANummer_TB.Text -eq "Reset") {
+        $GUI.MainWindow.Height = 564
+		$Einstellungen.TitelMenu_Setting_CB.IsChecked = $true
     }
 })
 
-$Window.MAC_TB.Add_TextChanged({
-	if (($Window.MAC_TB.Text -match "^[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}$" -or $Window.MAC_TB.Text -match "^[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}$" -or $Window.MAC_TB.Text -match "^[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}$" -or $Window.MAC_TB.Text -eq "")) {
-		if(!($Window.MAC_TB.Text -eq "")){
-			$Window.MAC_TB.Background = "white"
-			$Window.OSZuweisen_CB.IsEnabled = $true
+$GUI.MAC_TB.Add_TextChanged({
+	if (($GUI.MAC_TB.Text -match "^[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}$" -or $GUI.MAC_TB.Text -match "^[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}$" -or $GUI.MAC_TB.Text -match "^[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}[0-9A-F]{2}$" -or $GUI.MAC_TB.Text -eq "")) {
+		if(!($GUI.MAC_TB.Text -eq "")){
+			$GUI.MAC_TB.Background = "white"
+			$GUI.OSZuweisen_CB.IsEnabled = $true
 		}else{
-			$Window.MAC_TB.Background = "white"
-			$Window.OSZuweisen_CB.IsEnabled = $false
-			$Window.OSZuweisen_CB.IsChecked = $false
+			$GUI.MAC_TB.Background = "white"
+			$GUI.OSZuweisen_CB.IsEnabled = $false
+			$GUI.OSZuweisen_CB.IsChecked = $false
 		}
 	}else{
-		$Window.OSZuweisen_CB.IsEnabled = $false
-		$Window.OSZuweisen_CB.IsChecked = $false
-		$Window.MAC_TB.Background = $Rot
+		$GUI.OSZuweisen_CB.IsEnabled = $false
+		$GUI.OSZuweisen_CB.IsChecked = $false
+		$GUI.MAC_TB.Background = $Rot
 	}
 })
 
-$Window.ChangeLog_BTN.add_Click({
+$GUI.Einstellungen_BTN.add_Click({
+	$Einstellungen.Einstellungen.Show()
+})
+
+$GUI.ChangeLog_BTN.add_Click({
 	$ChangeLogPath = Join-Path $PSScriptRoot '\ChangeLog.log'
 	notepad $ChangeLogPath
 })
 
-$Window.Logs_BTN.add_Click({
+$GUI.Logs_BTN.add_Click({
 	explorer $LogPath
 })
 
-$Window.Doku_BTN.add_Click({
+$GUI.Doku_BTN.add_Click({
 	$DokuPath = Join-Path $PSScriptRoot '\Dokumentation.pdf'
 	Start-Process $DokuPath
 })
 
-$Window.ClientAnlegen_BTN.add_Click({
+$Einstellungen.TitelMenu_Setting_CB.add_Click({
+	if($Einstellungen.TitelMenu_Setting_CB.IsChecked){
+		$GUI.MainWindow.Height = 564
+	}else{
+		$GUI.MainWindow.Height = 540
+	}
+})
+
+$Einstellungen.Benachrichtigungen_Setting_CB.add_Click({
+	if($Einstellungen.Benachrichtigungen_Setting_CB.IsChecked){
+		# $GUI.MainWindow.Height = 564
+	}else{
+		# $GUI.MainWindow.Height = 540
+	}
+})
+
+$Einstellungen.Speichern_BTN.add_Click({
+	$Einstellungen.Einstellungen.Hide()
+})
+
+$GUI.ClientAnlegen_BTN.add_Click({
 	#Variablen von Terminal RunSpace in GUI RunSpace pushen
-	$Window.Name = $Window.MAC_TB.text
-	$Window.NDL = $Window.BANummer_TB.text
+	$GUI.Name = $GUI.MAC_TB.text
+	$GUI.NDL = $GUI.BANummer_TB.text
 	# GUI Runspace erstellen, damit die GUI und das Terminal parallel ausgeführt werden können
 	$runspace = [runspacefactory]::CreateRunspace()
 	$powerShell = [powershell]::Create()
 	$powerShell.runspace = $runspace
 	$runspace.Open()
-	$runspace.SessionStateProxy.SetVariable("Window",$Window)
+	$runspace.SessionStateProxy.SetVariable("GUI",$GUI)
 	
 	[void]$PowerShell.AddScript({
 		#Funktionen in GUI Runspace
 		function Progress($Progress){
-			$Window.ProgressBar.Dispatcher.Invoke([action]{
-				$Window.ProgressBar.Value = $Progress
-				$Window.ProgressBar.TextInput = "$($Progress)%"
+			$GUI.ProgressBar.Dispatcher.Invoke([action]{
+				$GUI.ProgressBar.Value = $Progress
 			})
 		}
 
 		function Message($Message){
-			$Window.Log_RTB.Dispatcher.Invoke([action]{
-				$Window.Log_RTB.AppendText("$($Message)")
+			$GUI.Log_RTB.Dispatcher.Invoke([action]{
+				$GUI.Log_RTB.AppendText("$($Message)")
 			})
 		}
 		# Skript
-		$Window.Log_RTB.Dispatcher.Invoke([action]{
-			$Window.Log_RTB.Document.Blocks.Clear()
-			$Window.ProgressBar.Visibility = "Visible"
-			$Window.ProgressBar.Value = 0
-			$Window.Log_RTB.AppendText("Name ermitteln...   ")
+		$GUI.Log_RTB.Dispatcher.Invoke([action]{
+			$GUI.Log_RTB.Document.Blocks.Clear()
+			$GUI.ProgressBar.Visibility = "Visible"
+			$GUI.ProgressBar.Value = 0
+			$GUI.Log_RTB.AppendText("Name ermitteln...   ")
 		})
 		start-sleep 1
 		Progress(10)
 		start-sleep 1
 		Progress(20)
 		start-sleep 1
-		Message("$($Window.Name)`rClient anlegen ...   ")
+		Message("$($GUI.Name)`rClient anlegen ...   ")
 		Progress(40)
 		start-sleep 1
 		Progress(50)
@@ -155,9 +184,20 @@ $Window.ClientAnlegen_BTN.add_Click({
 		Progress(95)
 		Start-Sleep 1
 		Progress(100)
-		# Message("erfolgreich`r`"$($Window.Name)`" wurde in `"$($Window.NDL)`" angelegt")
+		# Message("erfolgreich`r`"$($GUI.Name)`" wurde in `"$($GUI.NDL)`" angelegt")
 		Message("erfolgreich`r############## FERTIG #############")
 	})
 	$PowerShell.BeginInvoke()
+	if($Einstellungen.Benachrichtigungen_Setting_CB.IsChecked -eq $True){
+		[void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
+		$objNotifyIcon = New-Object System.Windows.Forms.NotifyIcon 
+		$objNotifyIcon.Icon = "C:\Icons\wt.ico"
+		$objNotifyIcon.BalloonTipIcon = "Info" #"Error" 
+		$objNotifyIcon.BalloonTipText = "Es dauert nur noch einen kurzen Augenblick!" 
+		$objNotifyIcon.BalloonTipTitle = "Endpoint Creation Tool legt los!"
+		$objNotifyIcon.Visible = $True
+		$objNotifyIcon.ShowBalloonTip(10000)
+	}
 })
-$Window.MainWindow.ShowDialog() | Out-Null
+
+$GUI.MainWindow.ShowDialog() | Out-Null
